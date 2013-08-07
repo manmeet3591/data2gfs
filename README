@@ -21,7 +21,6 @@ expで用意しているシェルスクリプト
 コンパイルには、NCEPのライブラリbacio, iplib, splib, w3lib, g2libが必要
 
 更新履歴
- 2013.08.05 initial version 公開
- 2013.08.04 JRA25,ERA-interim,ALERA2用のスクリプトを追加
+ 2013.08.07 initial version 公開
 
 T.Miyachi
