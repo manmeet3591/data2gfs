@@ -1,0 +1,27 @@
+data2gfs
+
+NCEP-GFSの初期値ファイルを作成するためのプログラム
+
+ディレクトリ
+ ./exec 実行ファイル
+ ./src  プログラムソース
+ ./exp  実行シェルスクリプト
+
+expで用意しているシェルスクリプト
+ YOTC         hybrid level    grib1  userid=1
+ GANAL        pressure level  grads  userid=2
+ JRA25        pressure level  grib1  userid=3
+ ERA-interim  hybrid level    grib1  userid=4
+ ERA-interim  pressure level  grib1  userid=5
+ ALERA2       sigma level     grads  userid=6
+
+対応フォーマット
+ grib1, grib2, grads形式
+
+コンパイルには、NCEPのライブラリbacio, iplib, splib, w3lib, g2libが必要
+
+更新履歴
+ 2013.08.05 initial version 公開
+ 2013.08.04 JRA25,ERA-interim,ALERA2用のスクリプトを追加
+
+T.Miyachi
