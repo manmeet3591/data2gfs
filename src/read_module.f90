@@ -517,8 +517,8 @@ end subroutine read_grib2_plev
     ps = 0.
     if (psrec >= 0) then
        rec=psrec
-       if (rec == 0) rec=7*kn+1
-       read(lugb,rec=psrec) ps
+       if (rec == 0) rec=7*kn+1       
+       read(lugb,rec=rec) ps(:,:)
     end if
     close(lugb)
 
