@@ -41,7 +41,15 @@ contains
        if (present(maxwv) .and. maxwv>0) then
           ipopt(2) = maxwv
        else
-          ipopt(2) = kgdsi(2)/2 - 1 !linear grid
+          if (kgdsi(1)==0) then  ! latitude/longitude grid
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-3)/2) !linear grid
+          else if (kgdsi(1)==4) then ! gausian grid
+             ipopt(2) = min(kgdsi(2)/2-1, kgdsi(3)-1)     !linear grid
+          else if (kgdsi(1)==256) then ! latitude/longitude grid excluding pole
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-1)/2) !linear grid
+          else
+             ipopt(2) = -1
+          end if
        end if
        write(*,*) 'spectral interpolation. max wave number=',ipopt(2)
     else
@@ -82,7 +90,15 @@ contains
        if (present(maxwv) .and. maxwv>0) then
           ipopt(2) = maxwv
        else
-          ipopt(2) = kgdsi(2)/2 - 1 !linear grid
+          if (kgdsi(1)==0) then  ! latitude/longitude grid
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-3)/2) !linear grid
+          else if (kgdsi(1)==4) then ! gausian grid
+             ipopt(2) = min(kgdsi(2)/2-1, kgdsi(3)-1)     !linear grid
+          else if (kgdsi(1)==256) then ! latitude/longitude grid excluding pole
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-1)/2) !linear grid
+          else
+             ipopt(2) = -1
+          end if
        end if
        write(*,*) 'spectral interpolation. max wave number=',ipopt(2)
     else
@@ -125,7 +141,15 @@ contains
        if (present(maxwv) .and. maxwv>0) then
           ipopt(2) = maxwv
        else
-          ipopt(2) = kgdsi(2)/2 - 1 !linear grid
+          if (kgdsi(1)==0) then  ! latitude/longitude grid
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-3)/2) !linear grid
+          else if (kgdsi(1)==4) then ! gausian grid
+             ipopt(2) = min(kgdsi(2)/2-1, kgdsi(3)-1)     !linear grid
+          else if (kgdsi(1)==256) then ! latitude/longitude grid excluding pole
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-1)/2) !linear grid
+          else
+             ipopt(2) = -1
+          end if
        end if
        write(*,*) 'spectral interpolation. max wave number=',ipopt(2)
     else
@@ -166,7 +190,15 @@ contains
        if (present(maxwv) .and. maxwv>0) then
           ipopt(2) = maxwv
        else
-          ipopt(2) = kgdsi(2)/2 - 1 !linear grid
+          if (kgdsi(1)==0) then  ! latitude/longitude grid
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-3)/2) !linear grid
+          else if (kgdsi(1)==4) then ! gausian grid
+             ipopt(2) = min(kgdsi(2)/2-1, kgdsi(3)-1)     !linear grid
+          else if (kgdsi(1)==256) then ! latitude/longitude grid excluding pole
+             ipopt(2) = min(kgdsi(2)/2-1, (kgdsi(3)-1)/2) !linear grid
+          else
+             ipopt(2) = -1
+          end if
        end if
        write(*,*) 'spectral interpolation. max wave number=',ipopt(2)
     else
