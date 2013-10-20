@@ -4,8 +4,8 @@
 # YOTC lon/lat pressure level grib data
 #----------------------------------------------------
 
-export IDATE=2009093012
-export JCAP=190
+export IDATE=2013060812
+export JCAP=382
 
 . ../configure
 
@@ -20,13 +20,15 @@ echo $(pwd)
 PWD0=$(pwd)
 cd $DATA
 
-if [ ! -d $COMOUT/ecmwf/${IDATE} ] ; then
-    mkdir -p $COMOUT/ecmwf/${IDATE}
+${PWD0}/download_interim_plev.py ${IDATE} 0.5 $DATA/input.grib
+
+if [ ! -d $COMOUT/erai/${IDATE} ] ; then
+    mkdir -p $COMOUT/erai/${IDATE}
 fi
 
-ln -sf ERAINTERIM/0.5x0.5/anal_plev/${year}${month}/plev.${IDATE}.grib input.grib
+#ln -sf ERAINTERIM/0.5x0.5/anal_plev/${year}${month}/plev.${IDATE}.grib input.grib
 ln -sf ${OROGRAPHY} input.orography.grib
-ln -sf $COMOUT/ecmwf/${IDATE}/siganl.${IDATE}.t${JCAP} output.siganl
+ln -sf $COMOUT/erai/${IDATE}/siganl.${IDATE}.t${JCAP} output.siganl
 ln -sf $PWD0/ecmwf.grib1.table input.grib1.table
 
 cat <<EOF > data2gfs_namelist
@@ -34,7 +36,7 @@ cat <<EOF > data2gfs_namelist
   jcap=${JCAP},lonr=${LONB},latr=${LATB},levs=${LEVS},idusr=4
  /
  &dataparam
-  in=360,jn=181,kn=37,yr=${year},mn=${month},dy=${day},hr=${hour},
+  in=720,jn=181,kn=37,yr=${year},mn=${month},dy=${day},hr=${hour},
   qvar='qq ',levtyp=${LEVTYP},fhour=0.,form='grib1'
  /
  &ipparam
