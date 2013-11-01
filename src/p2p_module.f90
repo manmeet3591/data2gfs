@@ -38,7 +38,7 @@ contains
     k1 = size(in,3)
     k2 = size(out,3)
 
-    !$omp parallel private(j,k,kl,ko,lnpi,lnpo,idx,a,po,p1,p2,p3,p4,q1,q2,q3,q4)
+    !$omp parallel shared(i,j), private(k,kl,ko,lnpi,lnpo,idx,a,po,p1,p2,p3,p4,q1,q2,q3,q4)
     !$omp do
     do i = 1, xn
        do j = 1, yn
@@ -111,7 +111,7 @@ contains
     k1 = size(tin,3)
     k2 = size(tout,3)
 
-    !$omp parallel private(j,k,kl,ko,lnpi,lnpo,idx,a,po,p1,p2,p3,p4,q1,q2,q3,q4,Ts)
+    !$omp parallel shared(i,j), private(k,kl,ko,lnpi,lnpo,idx,a,po,p1,p2,p3,p4,q1,q2,q3,q4,Ts)
     !$omp do
     do i = 1, xn
        do j = 1, yn
