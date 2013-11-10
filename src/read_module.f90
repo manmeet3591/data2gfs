@@ -499,6 +499,7 @@ end subroutine read_grib2_plev
     end if
     if (iret /= 0) then
        write(*,*) 'file open error. iret=',iret
+       call abort
     end if
     field = 0.
     do i = 1, 7
@@ -717,7 +718,7 @@ end subroutine read_grib2_plev
     real(kind=sp),intent(out)     :: odata(in,jn,kn)
     integer(kind=i4b),intent(out),optional :: kgdso(200)
     
-    integer(kind=i4b) i,j,k,iret,n,nfiret
+    integer(kind=i4b) i,j,k,iret,n,nfiret,igds(5),igrid
     integer(kind=i4b) lugi,jskip,jdisc,jids(200),jpdtn,jpdt(200),jgdtn,jgdt(200),ndata
     logical unpack
     type(gribfield) gfld
@@ -746,7 +747,7 @@ end subroutine read_grib2_plev
     nfiret = 0
     do k = 1, kn
        jpdt(12)=levels(k)
-       call getgb2(lugb,lugi,jskip,jdisc,jids,jpdtn,jpdt,jgdtn,jgdt,unpack,ndata,gfld,iret)
+       call getgb2(lugb,lugi,jskip,jdisc,jids,jpdtn,jpdt,jgdtn,jgdt,unpack,ndata,gfld,iret)       
        if (iret == 99) then
           write(*,*) 'request not found.  var=',jpdt(1),jpdt(2),',level=',jpdt(12)
           write(*,*) 'no field. set to zero.'
@@ -780,17 +781,13 @@ end subroutine read_grib2_plev
           return
        end if
        if (present(kgdso)) then
-          kgdso(1)=gfld%igdtnum
-          kgdso(2)=gfld%igdtmpl(8)
-          kgdso(3)=gfld%igdtmpl(9)
-          kgdso(4)=gfld%igdtmpl(12)
-          kgdso(5)=gfld%igdtmpl(13)
-          kgdso(6)=gfld%igdtmpl(14)
-          kgdso(7)=gfld%igdtmpl(15)
-          kgdso(8)=gfld%igdtmpl(16)
-          kgdso(9)=gfld%igdtmpl(17)
-          kgdso(10)=gfld%igdtmpl(18)
-          kgdso(20)=gfld%igdtmpl(19)
+          !see more detail in gdt2gds.f and getgb2.f of g2lib
+          igds(1) = gfld%griddef
+          igds(2) = gfld%ngrdpts
+          igds(3) = gfld%numoct_opt
+          igds(4) = gfld%interp_opt
+          igds(5) = gfld%igdtnum
+          call gdt2gds(igds,gfld%igdtmpl,gfld%num_opt,gfld%list_opt,kgdso,igrid,iret)
        end if
     end do
 
@@ -807,7 +804,7 @@ end subroutine read_grib2_plev
     real(kind=sp),intent(out)     :: odata(in,jn)
     integer(kind=i4b),intent(out),optional :: kgdso(200)
     
-    integer(kind=i4b) i,j,iret,n
+    integer(kind=i4b) i,j,iret,n,igds(5),igrid
     integer(kind=i4b) lugi,jskip,jdisc,jids(200),jpdtn,jpdt(200),jgdtn,jgdt(200),ndata
     logical unpack
     type(gribfield) gfld
@@ -868,17 +865,13 @@ end subroutine read_grib2_plev
        return
     end if
     if (present(kgdso)) then
-       kgdso(1)=gfld%igdtnum
-       kgdso(2)=gfld%igdtmpl(8)
-       kgdso(3)=gfld%igdtmpl(9)
-       kgdso(4)=gfld%igdtmpl(12)
-       kgdso(5)=gfld%igdtmpl(13)
-       kgdso(6)=gfld%igdtmpl(14)
-       kgdso(7)=gfld%igdtmpl(15)
-       kgdso(8)=gfld%igdtmpl(16)
-       kgdso(9)=gfld%igdtmpl(17)
-       kgdso(10)=gfld%igdtmpl(18)
-       kgdso(20)=gfld%igdtmpl(19)
+       !see more detail in gdt2gds.f and getgb2.f of g2lib
+       igds(1) = gfld%griddef
+       igds(2) = gfld%ngrdpts
+       igds(3) = gfld%numoct_opt
+       igds(4) = gfld%interp_opt
+       igds(5) = gfld%igdtnum
+       call gdt2gds(igds,gfld%igdtmpl,gfld%num_opt,gfld%list_opt,kgdso,igrid,iret)
     end if
 
   end subroutine getgrib2_2d
