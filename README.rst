@@ -1,16 +1,16 @@
 data2gfs
 *********
-NCEP-GFSの初期値ファイル(sigma restart file)を作成するためのプログラム
+Program for creating the initial value file (sigma restart file) of NCEP-GFS
 
-概要
-=====
-ディレクトリ構成
------------------
- ./exec 実行ファイル
- ./src  プログラムソース
- ./exp  実行シェルスクリプト
+Overview
+========
+Directory structure
+-------------------
+ ./exec executable file 
+ ./src program source 
+ ./exp executable shell script
 
-実効シェルスクリプト
+Effective shell script
 ---------------------
  ===========  ==============  ======= ========
  name         vertical level  format  user id
@@ -23,25 +23,26 @@ NCEP-GFSの初期値ファイル(sigma restart file)を作成するためのプ�
  ALERA2       sigma level     grads   userid=6
  ===========  ==============  ======= ========
 
-対応フォーマット
+Supported formats
 -----------------
- grib1, grib2, grads形式
+ grib1, grib2, grads format
 
-コンパイル
+Compile
 ===========
-NCEPのライブラリ(w3lib, bacio, g2lib, iplib, splib)が必要。
+NCEP libraries (w3lib, bacio, g2lib, iplib, splib) are required.
 
 - http://www.nco.ncep.noaa.gov/pmb/docs/libs/
 - http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/
 
 
-更新履歴
-=========
+Change log
+==========
  2013.08.07 initial version 
 
 Author Information
 ===================
 tmiyachi 
+manmeet3591 - translated to english
 
 - https://bitbucket.org/tmiyachi
 - https://github.com/tmiyachi
