@@ -1,10 +1,11 @@
-各種データセットからsigmaファイルをつくるシェルスクリプト
+Shell script to create sigma file from various data sets
 
-主な設定はcinfigureを編集。細かな設定はスクリプトを参照。
+Main settings edit cinfigure. See the script for detailed settings.
 
-どのスクリプト（データセット）から作ったかを区別するために
-sigmaファイルのusridに値を入れるようにしてある。IDはスクリプト
-の２行目に書いてあるSCRIPT IDで区別する（namelistのusrid）。
-何も設定しない場合は99が入る。
+To distinguish which script (dataset) was created from
+A value is entered in usrid of the sigma file. ID is script
+Is distinguished by the SCRIPT ID written on the second line (usrid in namelist).
+Enter 99 if nothing is set.
 
-後で区別できなくなるのでIDはスクリプトごとに設定するのをおすすめする。
+We recommend that you set the ID for each script, because you will not be able to distinguish them later.
+
